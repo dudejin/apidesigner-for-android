@@ -39,6 +39,14 @@ public interface APIConstructor {
     String getBaseUrl();
 
     /**
+     * is success
+     *
+     * @param response response
+     * @return true or false
+     */
+    boolean isSuccess(APIResponse response);
+
+    /**
      * parse Data
      *
      * @param response response

@@ -72,6 +72,7 @@ public final class APIResponse {
         private String data = null;
         private Object object = null;
         private Object objectList = null;
+        private boolean isSuccess = false;
 
         /**
          * parse Status
@@ -83,6 +84,15 @@ public final class APIResponse {
                 code = constructor.parseCode(response);
             }
             return code;
+        }
+
+        /**
+         * isSuccess
+         *
+         * @return true or false
+         */
+        public boolean isSuccess() {
+            return constructor.isSuccess(response);
         }
 
         /**
