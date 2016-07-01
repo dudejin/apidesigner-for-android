@@ -1,6 +1,10 @@
 # apidesigner-for-android
 this is android api designer framework
-#use
+##use apidesigner
+Gradle
+```
+compile 'com.liangmayong:apidesigner:1.0.0'
+```
 Maven
 ```
 <dependency>
@@ -9,10 +13,6 @@ Maven
   <version>1.0.0</version>
   <type>pom</type>
 </dependency>
-```
-Gradle
-```
-compile 'com.liangmayong:apidesigner:1.0.0'
 ```
 
 ##编写接口
