@@ -1,18 +1,16 @@
 # apidesigner-for-android
 this is android api designer framework
 ##use apidesigner
-Gradle
 ```
-compile 'com.liangmayong:apidesigner:1.0.0'
-```
-Maven
-```
-<dependency>
-  <groupId>com.liangmayong</groupId>
-  <artifactId>apidesigner</artifactId>
-  <version>1.0.0</version>
-  <type>pom</type>
-</dependency>
+repositories {
+    maven {
+        url 'https://dl.bintray.com/liangmayong/maven/'
+    }
+}
+
+dependencies {
+    compile 'com.liangmayong:apidesigner:1.0.0'
+}
 ```
 
 ##编写接口
