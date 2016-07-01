@@ -48,10 +48,11 @@ public interface APIConstructor {
 
     /**
      * parseEntity
+     *
      * @param entityClass entityClass
-     * @param response response
-     * @param <T>
-     * @return
+     * @param response    response
+     * @param <T>         t
+     * @return t
      */
     <T> T parseEntity(Class<T> entityClass, APIResponse response);
 
