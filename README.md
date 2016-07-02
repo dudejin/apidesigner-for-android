@@ -9,7 +9,7 @@ dependencies {
 
 ##START
 
-**1 SETP**：implements APIConstructor
+**1 SETP**：Implements APIConstructor
 
 ```
 package com.liangmayong.api;
@@ -86,7 +86,7 @@ public class APICon implements APIConstructor {
 }
 
 ```
-**2 STEP**：extends APIModule
+**2 STEP**：Extends APIModule
 
 ```
 package com.liangmayong.api;
@@ -123,7 +123,7 @@ public class UserAPI extends APIModule{
 }
 
 ```
-**3 STEP**use
+**3 STEP**: use
 
 ```
 package com.liangmayong.api;
