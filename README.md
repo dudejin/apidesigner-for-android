@@ -166,7 +166,7 @@ public class APIActivity extends Activity {
 
 ```
 ##技术交流
-交流：QQ群297798093，博主QQ591694077
+交流：QQ群297798093
 
 email：ibeam@qq.com
 ##License
