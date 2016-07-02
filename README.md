@@ -1,21 +1,15 @@
 # apidesigner-for-android
 this is android api designer framework
-##use apidesigner
+##gradle
 ```
-repositories {
-    maven {
-        url 'https://dl.bintray.com/liangmayong/maven/'
-    }
-}
-
 dependencies {
     compile 'com.liangmayong:apidesigner:1.0.0'
 }
 ```
 
-##编写接口
+##START
 
-**第一步**：创建接口构造器（实现APIConstructor接口），看代码
+**1 SETP**：implements APIConstructor
 
 ```
 package com.liangmayong.api;
@@ -40,75 +34,59 @@ public class APICon implements APIConstructor {
 	}
 
 	@Override
+	public boolean isSuccess(APIResponse response) {
+		//request success?
+	}
+	
+	@Override
 	public String parseData(APIResponse response) {
-	  //编写解析规则
-		JSONObject json = (JSONObject) response.getResponse();
-		try {
-			return json.getString("data");
-		} catch (Exception e) {
-			return "";
-		}
+		//parse data
 	}
 
 	@Override
 	public <T> T parseEntity(Class<T> entityClass, APIResponse response) {
-	  //在这里，你来决定使用gson还是fastjson，或者其他解析库
+		//parse entity
 		return null;
 	}
 
 	@Override
 	public <T> List<T> parseEntitys(Class<T> entityClass, APIResponse response) {
-	  //在这里，你来决定使用gson还是fastjson，或者其他解析库
+		//parse entitys
 		return null;
 	}
 
 	@Override
 	public String parseMessage(APIResponse response) {
-	  //编写解析规则
-		JSONObject json = (JSONObject) response.getResponse();
-		try {
-			return json.getString("message");
-		} catch (Exception e) {
-			return "";
-		}
+		//parse message
 	}
 
 	@Override
 	public String parseCode(APIResponse response) {
-		JSONObject json = (JSONObject) response.getResponse();
-		try {
-			return json.getString("code");
-		} catch (Exception e) {
-			return "";
-		}
+		//parse code
 	}
 
 	@Override
 	public void destroy(Context context) {
-		//这里写上停止请求的方法
+		//destroy request
 	}
 
 	@Override
 	public void asynchronousRequest(Context context, APIMethod method, String url, APIParameter parameter,
 			OnApiRequestListener listener) {
-		//这里是异步请求具体实现，通过listener返回请求结果
-		//在这里你来决定用Volley还是okhttp,或者其他的请求库
-		//method 是请求方式，包括GET,POST,DELETE,PUT
+		//asynchronous request
 	}
 
 	@Override
 	public APIResponse synchronizationRequest(Context context, APIMethod method, String url, APIParameter parameter)
 			throws APIErrorException {
-		//这里是同步请求具体实现，直接返回结果
-		//在这里你来决定用Volley还是okhttp,或者其他的请求库
-		//method 是请求方式，包括GET,POST,DELETE,PUT
+		//synchronization request
 		return null;
 	}
 
 }
 
 ```
-**第二步**：定义接口（继承APIModule，可以根据不同的模块，定义对应的接口Module）
+**2 STEP**：extends APIModule
 
 ```
 package com.liangmayong.api;
@@ -127,52 +105,25 @@ import android.content.Context;
 
 public class UserAPI extends APIModule{
 
-	//定义Call接口，Call接口是在调用时选择同步请求还是异步请求
+	//return Call
 	public Call login(String username,String password) {
-		//使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
+	
 		String url = "/user/login.do";
-
-		//使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
+		//or
 		//String url = "http://192.168.1.100/user/login.do";
 		
-		//封装请求参数
+		//parameter
 		APIParameter parameter = new APIParameter();
 		parameter.put("username", username);
 		parameter.put("password", password);
+		
 		return createCall(APIMethod.POST,url,parameter);
 	}
 
-	//定义异步接口,自动根据APICon定义的自动解析出对应的结果
-	public void login(Context context,String username,String password,OnApiEntityListener<UserInfo> listener) {
-
-		//使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
-		String url = "/user/login.do";
-
-		//使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
-		//String url = "http://192.168.1.100/user/login.do";
-		APIParameter parameter = new APIParameter();
-		parameter.put("username", username);
-		parameter.put("password", password);
-		createCall(APIMethod.POST,url,parameter).asynchronousRequest(context, listener);
-	}
-	
-
-	public APIResponse login(Context context, String username, String password) throws APIErrorException {
-
-		// 使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
-		String url = "/user/login.do";
-
-		// 使用相对接口地址，会自动与APICon中的getBaseUrl()返回值拼接
-		// String url = "http://192.168.1.100/user/login.do";
-		APIParameter parameter = new APIParameter();
-		parameter.put("username", username);
-		parameter.put("password", password);
-		return createCall(APIMethod.POST, url, parameter).synchronousRequest(context);
-	}
 }
 
 ```
-**第三步**使用接口
+**3 STEP**use
 
 ```
 package com.liangmayong.api;
@@ -192,43 +143,23 @@ public class APIActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// 创建接口模块
+		// init
 		UserAPI userAPI = APIDesigner.constructor(APICon.class).create(UserAPI.class);
-		// 1，通过Call调用
+		//get call
 		Call call = userAPI.login("user", "pass");
-		//异步请求
+		//request
 		call.asynchronousRequest(this, new OnApiEntityListener<UserInfo>() {
 
 			@Override
 			public void result(String code, String message, UserInfo entity, APIResponse response) {
-				// 请求成功
+				// result
 			}
 
 			@Override
 			public void failure(Throwable error) {
-				// 请求失败
-			}
-
-			@Override
-			public void loading() {
-				// 开始请求
-
+				// failure
 			}
 		});
-		//同步请求
-		try {
-			APIResponse response = call.synchronousRequest(this);
-			//请求成功
-			//获得解析器，解析结果Code
-			response.getParser().getCode();
-			//获得解析器，解析结果Message
-			response.getParser().getMessage();
-			//获得解析器，解析结果Message
-			UserInfo info = response.getParser().getEntity(UserInfo.class);
-		} catch (APIErrorException e) {
-			//请求失败
-		}
-		
 	}
 
 }
@@ -238,3 +169,19 @@ public class APIActivity extends Activity {
 交流：QQ群297798093，博主QQ591694077
 
 email：ibeam@qq.com
+##License
+```
+Copyright 2016 LiangMaYong
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
