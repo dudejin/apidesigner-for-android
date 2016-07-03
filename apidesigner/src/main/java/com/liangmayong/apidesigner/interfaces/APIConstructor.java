@@ -18,7 +18,7 @@ import android.content.Context;
 public interface APIConstructor {
 
     /**
-     * API REQUEST Method<br>
+     * APIDesigner REQUEST Method<br>
      * CREATE PUT<br>
      * READ GET<br>
      * UPDATE POST<br>

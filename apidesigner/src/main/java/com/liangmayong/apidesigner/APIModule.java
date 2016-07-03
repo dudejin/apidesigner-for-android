@@ -26,14 +26,14 @@ public class APIModule {
     public APIModule() {
     }
 
-    private API connector;
+    private APIDesigner connector;
 
     /**
      * attachConnector
      *
      * @param connector connector
      */
-    protected void attachAPI(API connector) {
+    protected void attachAPI(APIDesigner connector) {
         this.connector = connector;
     }
 
@@ -50,7 +50,7 @@ public class APIModule {
             Call call = new Call(connector, method, url, parameter);
             return call;
         } else {
-            APILog.d("not attach API");
+            APILog.d("not attach APIDesigner");
             return null;
         }
     }
@@ -71,12 +71,12 @@ public class APIModule {
      */
     public static class Call {
 
-        private API connector;
+        private APIDesigner connector;
         private APIMethod method;
         private String url;
         private APIParameter parameter;
 
-        private Call(API connector, APIMethod method, String url, APIParameter parameter) {
+        private Call(APIDesigner connector, APIMethod method, String url, APIParameter parameter) {
             this.connector = connector;
             this.method = method;
             this.parameter = parameter;

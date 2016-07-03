@@ -19,28 +19,27 @@ import com.liangmayong.apidesigner.listener.OnApiStringListener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 
 /**
- * API
+ * APIDesigner
  *
  * @author LiangMaYong
  * @version 1.0
  */
 @SuppressLint("DefaultLocale")
-public final class API {
-    private static Map<String, API> connectorMap = new HashMap<String, API>();
+public final class APIDesigner {
+    private static Map<String, APIDesigner> connectorMap = new HashMap<String, APIDesigner>();
 
-    public final static API constructor(Class<? extends APIConstructor> constructorClass) {
+    public final static APIDesigner constructor(Class<? extends APIConstructor> constructorClass) {
         if (constructorClass == null) {
             return null;
         }
         if (connectorMap.containsKey(constructorClass.getName())) {
-            API connector = connectorMap.get(constructorClass.getName());
+            APIDesigner connector = connectorMap.get(constructorClass.getName());
             return connector;
         } else {
             try {
-                API connector = new API(constructorClass.newInstance());
+                APIDesigner connector = new APIDesigner(constructorClass.newInstance());
                 connectorMap.put(constructorClass.getName(), connector);
                 return connector;
             } catch (Exception e) {
@@ -52,7 +51,7 @@ public final class API {
     private APIConstructor constructor = null;
 
     protected String getTag() {
-        return "API";
+        return "APIDesigner";
     }
 
     /**
@@ -74,7 +73,7 @@ public final class API {
         return null;
     }
 
-    private API(APIConstructor constructor) {
+    private APIDesigner(APIConstructor constructor) {
         this.constructor = constructor;
     }
 
