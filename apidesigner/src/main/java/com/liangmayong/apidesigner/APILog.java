@@ -3,7 +3,10 @@ package com.liangmayong.apidesigner;
 import android.util.Log;
 
 /**
- * Created by 007 on 2016/7/1.
+ * APILog
+ *
+ * @author LiangMaYong
+ * @version 1.0
  */
 public class APILog {
     public static boolean DEBUG = true;

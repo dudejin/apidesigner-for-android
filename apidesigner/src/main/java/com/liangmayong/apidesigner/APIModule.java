@@ -144,19 +144,19 @@ public class APIModule {
                 return false;
             }
             if (listener instanceof OnApiDefaultListener) {
-                connector.request(context, method, parseUrl(url), parameter, (OnApiDefaultListener) listener);
+                connector.asynchronousRequest(context, method, parseUrl(url), parameter, (OnApiDefaultListener) listener);
                 return true;
             } else if (listener instanceof OnApiEntityListener) {
-                connector.request(context, method, parseUrl(url), parameter, (OnApiEntityListener) listener);
+                connector.asynchronousRequest(context, method, parseUrl(url), parameter, (OnApiEntityListener) listener);
                 return true;
             } else if (listener instanceof OnApiEntityListListener) {
-                connector.request(context, method, parseUrl(url), parameter, (OnApiEntityListListener) listener);
+                connector.asynchronousRequest(context, method, parseUrl(url), parameter, (OnApiEntityListListener) listener);
                 return true;
             } else if (listener instanceof OnApiRequestListener) {
-                connector.request(context, method, parseUrl(url), parameter, (OnApiRequestListener) listener);
+                connector.asynchronousRequest(context, method, parseUrl(url), parameter, (OnApiRequestListener) listener);
                 return true;
             } else if (listener instanceof OnApiStringListener) {
-                connector.request(context, method, parseUrl(url), parameter, (OnApiStringListener) listener);
+                connector.asynchronousRequest(context, method, parseUrl(url), parameter, (OnApiStringListener) listener);
                 return true;
             }
             return false;
@@ -199,8 +199,8 @@ public class APIModule {
          * @return APIResponse
          * @throws APIErrorException error
          */
-        public APIResponse synchronousRequest(Context context) throws APIErrorException {
-            return connector.syncRequest(context, method, url, parameter);
+        public APIResponse synchronizationRequest(Context context) throws APIErrorException {
+            return connector.synchronizationRequest(context, method, url, parameter);
         }
     }
 }

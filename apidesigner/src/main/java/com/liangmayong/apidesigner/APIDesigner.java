@@ -78,7 +78,7 @@ public final class APIDesigner {
     }
 
     /**
-     * request
+     * asynchronousRequest
      *
      * @param context   context
      * @param method    method
@@ -87,9 +87,9 @@ public final class APIDesigner {
      * @param listener  listener
      * @param <T>       t
      */
-    protected <T> void request(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
                                final OnApiEntityListener<T> listener) {
-        request(context, method, url, parameter, new OnApiRequestListener() {
+        asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
             @Override
             public void onResponse(APIResponse response) {
                 if (listener != null) {
@@ -114,7 +114,7 @@ public final class APIDesigner {
     }
 
     /**
-     * request
+     * asynchronousRequest
      *
      * @param context   context
      * @param method    method
@@ -123,9 +123,9 @@ public final class APIDesigner {
      * @param listener  listener
      * @param <T>       t
      */
-    protected <T> void request(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
                                final OnApiEntityListListener<T> listener) {
-        request(context, method, url, parameter, new OnApiRequestListener() {
+        asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
             public void onResponse(APIResponse response) {
@@ -151,7 +151,7 @@ public final class APIDesigner {
     }
 
     /**
-     * request
+     * asynchronousRequest
      *
      * @param context   context
      * @param method    method
@@ -159,9 +159,9 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void request(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
                            final OnApiStringListener listener) {
-        request(context, method, url, parameter, new OnApiRequestListener() {
+        asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
             public void onResponse(APIResponse response) {
@@ -181,7 +181,7 @@ public final class APIDesigner {
     }
 
     /**
-     * request
+     * asynchronousRequest
      *
      * @param context   context
      * @param method    method
@@ -189,9 +189,9 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void request(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
                            final OnApiDefaultListener listener) {
-        request(context, method, url, parameter, new OnApiRequestListener() {
+        asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
             public void onResponse(APIResponse response) {
@@ -210,22 +210,7 @@ public final class APIDesigner {
     }
 
     /**
-     * syncRequest
-     *
-     * @param context   context
-     * @param method    method
-     * @param url       url
-     * @param parameter parameter
-     * @return APIResponse
-     * @throws APIErrorException error
-     */
-    protected APIResponse syncRequest(Context context, APIMethod method, String url, APIParameter parameter)
-            throws APIErrorException {
-        return constructor.synchronizationRequest(context, method, url, parameter);
-    }
-
-    /**
-     * request
+     * asynchronousRequest
      *
      * @param context   context
      * @param method    method
@@ -233,7 +218,7 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void request(Context context, APIMethod method, String url, APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, APIParameter parameter,
                            final OnApiRequestListener listener) {
         constructor.asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
             @Override
@@ -252,6 +237,21 @@ public final class APIDesigner {
                 APILog.d("onFailure", e);
             }
         });
+    }
+
+    /**
+     * synchronizationRequest
+     *
+     * @param context   context
+     * @param method    method
+     * @param url       url
+     * @param parameter parameter
+     * @return APIResponse
+     * @throws APIErrorException error
+     */
+    protected APIResponse synchronizationRequest(Context context, APIMethod method, String url, APIParameter parameter)
+            throws APIErrorException {
+        return constructor.synchronizationRequest(context, method, url, parameter);
     }
 
     /**

@@ -139,4 +139,11 @@ public class APIParameter {
         }
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "APIParameter{" +
+                "params=" + params +
+                '}';
+    }
 }

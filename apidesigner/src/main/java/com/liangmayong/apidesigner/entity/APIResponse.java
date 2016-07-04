@@ -55,6 +55,13 @@ public final class APIResponse {
         return parser;
     }
 
+    @Override
+    public String toString() {
+        return "APIResponse{" +
+                "object=" + object +
+                '}';
+    }
+
     /**
      * @author LiangMaYong
      * @version 1.0
