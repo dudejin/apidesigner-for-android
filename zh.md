@@ -1,7 +1,6 @@
 # apidesigner-for-android
 this is android api designer framework
 
-[中文](https://github.com/LiangMaYong/apidesigner-for-android/blob/master/zh.md)
 ## Gradle
 ```
 dependencies {
@@ -9,9 +8,9 @@ dependencies {
 }
 ```
 
-## Start
+##开始使用
 
-**1 SETP**：Implements APIConstructor
+**第 1 步**：实现接口<code> APIConstructor </code>
 
 ```
 public class APICon implements APIConstructor {
@@ -19,7 +18,7 @@ public class APICon implements APIConstructor {
     ``````
 }
 ```
-**2 STEP**：Extends APIModule
+**第 2 步**：声明请求接口，继承于<code> APIModule </code>
 
 ```
 public class UserAPI extends APIModule{
@@ -36,7 +35,7 @@ public class UserAPI extends APIModule{
     }
 }
 ```
-**3 STEP**: Request
+**第 3 步**: 请求接口
 
 ```
 // init
@@ -57,10 +56,10 @@ call.asynchronousRequest(this, new OnApiEntityListener<UserInfo>() {
     }
 });
 ```
-##Technical exchange
+##技术交流
 QQGroup：297798093
 
-email：ibeam@qq.com
+email: ibeam@qq.com
 ##License
 ```
 Copyright 2016 LiangMaYong
