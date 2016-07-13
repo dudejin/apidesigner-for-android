@@ -27,7 +27,7 @@ public class UserAPI extends APIModule{
 	
         String url = "/user/login.do";
         //parameter
-        APIParameter parameter = new APIParameter();
+        Parameter parameter = new Parameter();
         parameter.put("username", username);
         parameter.put("password", password);
         
@@ -46,7 +46,7 @@ Call call = userAPI.login("user", "pass");
 call.asynchronousRequest(this, new OnApiEntityListener<UserInfo>() {
 
     @Override
-    public void result(String code, String message, UserInfo entity, APIResponse response) {
+    public void result(String code, String message, UserInfo entity, Response response) {
         // result
     }
 

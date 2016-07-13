@@ -2,9 +2,9 @@ package com.liangmayong.apidesigner.interfaces;
 
 import java.util.List;
 
-import com.liangmayong.apidesigner.entity.APIParameter;
-import com.liangmayong.apidesigner.entity.APIResponse;
-import com.liangmayong.apidesigner.exception.APIErrorException;
+import com.liangmayong.apidesigner.entity.Parameter;
+import com.liangmayong.apidesigner.entity.Response;
+import com.liangmayong.apidesigner.exception.APIRequsetException;
 import com.liangmayong.apidesigner.listener.OnApiRequestListener;
 
 import android.content.Context;
@@ -44,7 +44,7 @@ public interface APIConstructor {
      * @param response response
      * @return true or false
      */
-    boolean isSuccess(APIResponse response);
+    boolean isSuccess(Response response);
 
     /**
      * parse Data
@@ -52,7 +52,7 @@ public interface APIConstructor {
      * @param response response
      * @return data
      */
-    String parseData(APIResponse response);
+    String parseData(Response response);
 
     /**
      * parseEntity
@@ -62,7 +62,7 @@ public interface APIConstructor {
      * @param <T>         t
      * @return t
      */
-    <T> T parseEntity(Class<T> entityClass, APIResponse response);
+    <T> T parseEntity(Class<T> entityClass, Response response);
 
     /**
      * parseEntitys
@@ -72,7 +72,7 @@ public interface APIConstructor {
      * @param <T>         t
      * @return list
      */
-    <T> List<T> parseEntitys(Class<T> entityClass, APIResponse response);
+    <T> List<T> parseEntitys(Class<T> entityClass, Response response);
 
     /**
      * parseMessage
@@ -80,7 +80,7 @@ public interface APIConstructor {
      * @param response response
      * @return message
      */
-    String parseMessage(APIResponse response);
+    String parseMessage(Response response);
 
     /**
      * parseCode
@@ -88,7 +88,7 @@ public interface APIConstructor {
      * @param response response
      * @return code
      */
-    String parseCode(APIResponse response);
+    String parseCode(Response response);
 
     /**
      * destroy
@@ -106,7 +106,7 @@ public interface APIConstructor {
      * @param parameter parameter
      * @param listener  listener
      */
-    void asynchronousRequest(Context context, APIMethod method, String url, APIParameter parameter,
+    void asynchronousRequest(Context context, APIMethod method, String url, Parameter parameter,
                              final OnApiRequestListener listener);
 
     /**
@@ -116,9 +116,9 @@ public interface APIConstructor {
      * @param method    method
      * @param url       url
      * @param parameter parameter
-     * @return APIResponse
-     * @throws APIErrorException e
+     * @return Response
+     * @throws APIRequsetException e
      */
-    APIResponse synchronizationRequest(Context context, APIMethod method, String url, APIParameter parameter)
-            throws APIErrorException;
+    Response synchronizationRequest(Context context, APIMethod method, String url, Parameter parameter)
+            throws APIRequsetException;
 }

@@ -5,18 +5,18 @@ import java.util.List;
 import com.liangmayong.apidesigner.interfaces.APIConstructor;
 
 /**
- * APIResponse
+ * Response
  *
  * @author LiangMaYong
  * @version 1.0
  */
-public final class APIResponse {
+public final class Response {
 
-    public APIResponse(APIConstructor constructor) {
+    public Response(APIConstructor constructor) {
         this.constructor = constructor;
     }
 
-    public APIResponse(APIConstructor constructor, Object object) {
+    public Response(APIConstructor constructor, Object object) {
         this.constructor = constructor;
         setResponse(object);
     }
@@ -57,7 +57,7 @@ public final class APIResponse {
 
     @Override
     public String toString() {
-        return "APIResponse{" +
+        return "Response{" +
                 "object=" + object +
                 '}';
     }
@@ -68,9 +68,9 @@ public final class APIResponse {
      */
     public class APIParser {
 
-        private APIResponse response;
+        private Response response;
 
-        public APIParser(APIResponse response) {
+        public APIParser(Response response) {
             this.response = response;
         }
 

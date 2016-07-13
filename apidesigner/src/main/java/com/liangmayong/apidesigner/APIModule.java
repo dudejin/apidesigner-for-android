@@ -3,9 +3,9 @@ package com.liangmayong.apidesigner;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.liangmayong.apidesigner.entity.APIParameter;
-import com.liangmayong.apidesigner.entity.APIResponse;
-import com.liangmayong.apidesigner.exception.APIErrorException;
+import com.liangmayong.apidesigner.entity.Parameter;
+import com.liangmayong.apidesigner.entity.Response;
+import com.liangmayong.apidesigner.exception.APIRequsetException;
 import com.liangmayong.apidesigner.interfaces.APIConstructor.APIMethod;
 import com.liangmayong.apidesigner.listener.OnApiDefaultListener;
 import com.liangmayong.apidesigner.listener.OnApiEntityListListener;
@@ -45,7 +45,7 @@ public class APIModule {
      * @param parameter parameter
      * @return call
      */
-    protected Call createCall(APIMethod method, String url, final APIParameter parameter) {
+    protected Call createCall(APIMethod method, String url, final Parameter parameter) {
         if (connector != null) {
             Call call = new Call(connector, method, url, parameter);
             return call;
@@ -74,9 +74,9 @@ public class APIModule {
         private APIDesigner connector;
         private APIMethod method;
         private String url;
-        private APIParameter parameter;
+        private Parameter parameter;
 
-        private Call(APIDesigner connector, APIMethod method, String url, APIParameter parameter) {
+        private Call(APIDesigner connector, APIMethod method, String url, Parameter parameter) {
             this.connector = connector;
             this.method = method;
             this.parameter = parameter;
@@ -196,10 +196,10 @@ public class APIModule {
          * synchronousRequest
          *
          * @param context context
-         * @return APIResponse
-         * @throws APIErrorException error
+         * @return Response
+         * @throws APIRequsetException error
          */
-        public APIResponse synchronizationRequest(Context context) throws APIErrorException {
+        public Response synchronizationRequest(Context context) throws APIRequsetException {
             return connector.synchronizationRequest(context, method, url, parameter);
         }
     }

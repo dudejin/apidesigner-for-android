@@ -1,7 +1,7 @@
 package com.liangmayong.apidesigner.listener;
 
-import com.liangmayong.apidesigner.entity.APIResponse;
-import com.liangmayong.apidesigner.exception.APIErrorException;
+import com.liangmayong.apidesigner.entity.Response;
+import com.liangmayong.apidesigner.exception.APIRequsetException;
 
 /**
  * OnApiStringListener
@@ -19,13 +19,13 @@ public abstract class OnApiStringListener {
      * @param data     result data
      * @param response result response
      */
-    public abstract void result(String code, String message, String data, APIResponse response);
+    public abstract void result(String code, String message, String data, Response response);
 
     /**
      * failure
      *
      * @param error error
      */
-    public abstract void failure(APIErrorException error);
+    public abstract void failure(APIRequsetException error);
 
 }

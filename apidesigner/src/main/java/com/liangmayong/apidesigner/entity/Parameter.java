@@ -9,22 +9,22 @@ import org.json.JSONObject;
 import android.os.Bundle;
 
 /**
- * APIParameter
+ * Parameter
  *
  * @author LiangMaYong
  * @version 1.0
  */
-public class APIParameter {
+public class Parameter {
 
-    public APIParameter() {
+    public Parameter() {
         params = new HashMap<String, String>();
     }
 
-    public APIParameter(Map<String, String> copyMap) {
+    public Parameter(Map<String, String> copyMap) {
         params = new HashMap<String, String>(copyMap);
     }
 
-    public APIParameter(JSONObject copyJSON) {
+    public Parameter(JSONObject copyJSON) {
         params = jsonToMap(copyJSON);
     }
 
@@ -142,7 +142,7 @@ public class APIParameter {
 
     @Override
     public String toString() {
-        return "APIParameter{" +
+        return "Parameter{" +
                 "params=" + params +
                 '}';
     }

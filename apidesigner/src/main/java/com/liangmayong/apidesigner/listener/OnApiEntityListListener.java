@@ -2,8 +2,8 @@ package com.liangmayong.apidesigner.listener;
 
 import java.util.List;
 
-import com.liangmayong.apidesigner.entity.APIResponse;
-import com.liangmayong.apidesigner.exception.APIErrorException;
+import com.liangmayong.apidesigner.entity.Response;
+import com.liangmayong.apidesigner.exception.APIRequsetException;
 
 /**
  * OnApiEntityListListener
@@ -21,14 +21,14 @@ public abstract class OnApiEntityListListener<T> {
      * @param list     result entitys
      * @param response result response
      */
-    public abstract void result(String code, String message, List<T> list, APIResponse response);
+    public abstract void result(String code, String message, List<T> list, Response response);
 
     /**
      * failure
      *
      * @param error error
      */
-    public abstract void failure(APIErrorException error);
+    public abstract void failure(APIRequsetException error);
 
 
 }

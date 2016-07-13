@@ -6,9 +6,9 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.liangmayong.apidesigner.entity.APIParameter;
-import com.liangmayong.apidesigner.entity.APIResponse;
-import com.liangmayong.apidesigner.exception.APIErrorException;
+import com.liangmayong.apidesigner.entity.Parameter;
+import com.liangmayong.apidesigner.entity.Response;
+import com.liangmayong.apidesigner.exception.APIRequsetException;
 import com.liangmayong.apidesigner.interfaces.APIConstructor;
 import com.liangmayong.apidesigner.interfaces.APIConstructor.APIMethod;
 import com.liangmayong.apidesigner.listener.OnApiDefaultListener;
@@ -87,11 +87,11 @@ public final class APIDesigner {
      * @param listener  listener
      * @param <T>       t
      */
-    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final Parameter parameter,
                                final OnApiEntityListener<T> listener) {
         asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
             @Override
-            public void onResponse(APIResponse response) {
+            public void onResponse(Response response) {
                 if (listener != null) {
                     Class<T> entityClass = null;
                     Type t = listener.getClass().getGenericSuperclass();
@@ -105,7 +105,7 @@ public final class APIDesigner {
             }
 
             @Override
-            public void onFailure(APIErrorException e) {
+            public void onFailure(APIRequsetException e) {
                 if (listener != null) {
                     listener.failure(e);
                 }
@@ -123,12 +123,12 @@ public final class APIDesigner {
      * @param listener  listener
      * @param <T>       t
      */
-    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected <T> void asynchronousRequest(Context context, APIMethod method, String url, final Parameter parameter,
                                final OnApiEntityListListener<T> listener) {
         asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
-            public void onResponse(APIResponse response) {
+            public void onResponse(Response response) {
                 if (listener != null) {
                     Class<T> entityClass = null;
                     Type t = listener.getClass().getGenericSuperclass();
@@ -142,7 +142,7 @@ public final class APIDesigner {
             }
 
             @Override
-            public void onFailure(APIErrorException e) {
+            public void onFailure(APIRequsetException e) {
                 if (listener != null) {
                     listener.failure(e);
                 }
@@ -159,12 +159,12 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, final Parameter parameter,
                            final OnApiStringListener listener) {
         asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
-            public void onResponse(APIResponse response) {
+            public void onResponse(Response response) {
                 if (listener != null) {
                     listener.result(constructor.parseCode(response), constructor.parseMessage(response),
                             constructor.parseData(response), response);
@@ -172,7 +172,7 @@ public final class APIDesigner {
             }
 
             @Override
-            public void onFailure(APIErrorException e) {
+            public void onFailure(APIRequsetException e) {
                 if (listener != null) {
                     listener.failure(e);
                 }
@@ -189,19 +189,19 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void asynchronousRequest(Context context, APIMethod method, String url, final APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, final Parameter parameter,
                            final OnApiDefaultListener listener) {
         asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
 
             @Override
-            public void onResponse(APIResponse response) {
+            public void onResponse(Response response) {
                 if (listener != null) {
                     listener.result(constructor.parseCode(response), constructor.parseMessage(response), response);
                 }
             }
 
             @Override
-            public void onFailure(APIErrorException e) {
+            public void onFailure(APIRequsetException e) {
                 if (listener != null) {
                     listener.failure(e);
                 }
@@ -218,11 +218,11 @@ public final class APIDesigner {
      * @param parameter parameter
      * @param listener  listener
      */
-    protected void asynchronousRequest(Context context, APIMethod method, String url, APIParameter parameter,
+    protected void asynchronousRequest(Context context, APIMethod method, String url, Parameter parameter,
                            final OnApiRequestListener listener) {
         constructor.asynchronousRequest(context, method, url, parameter, new OnApiRequestListener() {
             @Override
-            public void onResponse(APIResponse response) {
+            public void onResponse(Response response) {
                 if (listener != null) {
                     listener.onResponse(response);
                 }
@@ -230,7 +230,7 @@ public final class APIDesigner {
             }
 
             @Override
-            public void onFailure(APIErrorException e) {
+            public void onFailure(APIRequsetException e) {
                 if (listener != null) {
                     listener.onFailure(e);
                 }
@@ -246,11 +246,11 @@ public final class APIDesigner {
      * @param method    method
      * @param url       url
      * @param parameter parameter
-     * @return APIResponse
-     * @throws APIErrorException error
+     * @return Response
+     * @throws APIRequsetException error
      */
-    protected APIResponse synchronizationRequest(Context context, APIMethod method, String url, APIParameter parameter)
-            throws APIErrorException {
+    protected Response synchronizationRequest(Context context, APIMethod method, String url, Parameter parameter)
+            throws APIRequsetException {
         return constructor.synchronizationRequest(context, method, url, parameter);
     }
 
